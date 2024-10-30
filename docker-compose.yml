@@ -1,0 +1,25 @@
+version: '3'  # If using a version that doesn't give warnings
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5433:5432"  # maps port 5433 on your host to port 5432 in the container
+    environment:
+      POSTGRES_USER: amine
+      POSTGRES_PASSWORD: 1999
+      POSTGRES_DB: pvsdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Persist data
+
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"  # Maps host port 3000 to container port 3000
+    environment:
+      DATABASE_URL: "postgresql://amine:1999@db:5432/pvsdb"  # Use container name for db
+
+volumes:
+  pgdata:  # Named volume to persist PostgreSQL data

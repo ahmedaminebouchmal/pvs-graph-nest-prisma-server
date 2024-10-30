@@ -1,0 +1,151 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Appointment {
+  createdAt: DateTime!
+  date: DateTime!
+  id: ID!
+  notes: String
+  patient: Patient!
+  patientId: ID!
+  staff: Staff!
+  staffId: ID!
+  status: String!
+  updatedAt: DateTime!
+}
+
+type Bill {
+  amount: Float!
+  appointment: Appointment!
+  appointmentId: ID!
+  createdAt: DateTime!
+  id: ID!
+  patient: Patient!
+  patientId: ID!
+  status: String!
+  updatedAt: DateTime!
+}
+
+input CreateAppointmentInput {
+  date: String!
+  notes: String
+  patientId: Int!
+  staffId: Int!
+  status: String!
+}
+
+input CreateBillInput {
+  amount: Float!
+  appointmentId: ID!
+  patientId: ID!
+  status: String!
+}
+
+input CreatePatientInput {
+  address: String!
+  dateOfBirth: DateTime!
+  email: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+}
+
+input CreateStaffInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  role: String!
+  specialty: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createAppointment(createAppointmentInput: CreateAppointmentInput!): Appointment!
+  createBill(createBillInput: CreateBillInput!): Bill!
+  createPatient(createPatientInput: CreatePatientInput!): Patient!
+  createStaff(createStaffInput: CreateStaffInput!): Staff!
+  removeAppointment(id: ID!): Appointment!
+  removeBill(id: ID!): Bill!
+  removePatient(id: ID!): Patient!
+  removeStaff(id: ID!): Staff!
+  updateAppointment(updateAppointmentInput: UpdateAppointmentInput!): Appointment!
+  updateBill(updateBillInput: UpdateBillInput!): Bill!
+  updatePatient(updatePatientInput: UpdatePatientInput!): Patient!
+  updateStaff(updateStaffInput: UpdateStaffInput!): Staff!
+}
+
+type Patient {
+  address: String!
+  createdAt: DateTime!
+  dateOfBirth: DateTime!
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  phone: String!
+  updatedAt: DateTime!
+}
+
+type Query {
+  allStaff: [Staff!]!
+  appointment(id: ID!): Appointment!
+  appointments: [Appointment!]!
+  bill(id: ID!): Bill!
+  bills: [Bill!]!
+  patient(id: ID!): Patient!
+  patients: [Patient!]!
+  staff(id: ID!): Staff!
+}
+
+type Staff {
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  phone: String!
+  role: String!
+  specialty: String
+  updatedAt: DateTime!
+}
+
+input UpdateAppointmentInput {
+  date: String
+  id: Int!
+  notes: String
+  patientId: Int
+  staffId: Int
+  status: String
+}
+
+input UpdateBillInput {
+  amount: Float
+  id: ID!
+  status: String
+}
+
+input UpdatePatientInput {
+  address: String
+  dateOfBirth: DateTime
+  email: String
+  firstName: String
+  id: ID!
+  lastName: String
+  phone: String
+}
+
+input UpdateStaffInput {
+  email: String
+  firstName: String
+  id: ID!
+  lastName: String
+  phone: String
+  role: String
+  specialty: String
+}
